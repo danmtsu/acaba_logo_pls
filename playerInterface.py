@@ -39,12 +39,13 @@ class PlayerInterface():
         self.menu_file.add_command(label="Iniciar jogo", command=print('Jogo iniciado'))
         self.menu_file.add_command(label="Restaurar estado inicial",command=print('jogo resetado'))
 
+    
         self.an_image = PhotoImage(file="./images/yellow_square.png")
         self.other_image = PhotoImage(file="./images/rectangle.png")
         self.oponnent_image = PhotoImage(file="./images/enemy_rectangle.png")
-# Preenchimento de table_frame com 21 imagens iguais, organizadas em 3 linhas e 7 colunas
+# Preenchimento de table_frame com 96 imagens iguais, organizadas em 12 linhas e 8 colunas
         self.board_view=[]
-        self.initialize_board(8,12)
+        self.initialize_board(12,8)
         for y in range(8):
             a_column = [] # columns
             for x in range(12):
@@ -56,6 +57,7 @@ class PlayerInterface():
                 aLabel.grid(row=x , column=y)
                 a_column.append(aLabel)
             self.board_view.append(a_column)
+            print([position for position in self.board.positions])
 
     
     def initialize_board(self,line,column):

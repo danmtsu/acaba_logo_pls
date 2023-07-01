@@ -1,8 +1,8 @@
 class Piece():
-    def __init__(self,line,column,frozen:False,team:int):
+    def __init__(self,line,column,team:int):
         self.__line = line
         self.__column = column
-        self.__frozen = frozen
+        self.__frozen = False
         self.__team = team
 
     @property
