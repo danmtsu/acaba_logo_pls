@@ -33,11 +33,15 @@ class Board:
                 elif position.line == 9 and (2 <= position.column  and position.column <= 5):
                     self.place_piece(position.line, position.column, 2)
                 elif position.column == 2:
-                    if position.line < 2 or position.line > 9:
+                    if position.line < 2:
                         self.place_piece(position.line, position.column, 1)
+                    elif position.line>9:
+                        self.place_piece(position.line,position.column,2)
                 elif position.column == 5:
-                    if position.line < 2 or position.line > 9:
-                        self.place_piece(position.line, position.column, 2)
+                    if position.line < 2:
+                        self.place_piece(position.line, position.column, 1)
+                    elif position.line>9:
+                        self.place_piece(position.line,position.column,2)
 
     def __str__(self) -> str:
         return f"Board(lines:{self.line}, columns:{self.column})"

@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import simpledialog
+from tkinter import Canvas
 from models.board import Board
 import os
 
@@ -11,6 +12,8 @@ class PlayerInterface():
         self.fill_main_window()# chamada da função fill_main_window para o tratamento da interface inicial do player
         self.main_window.mainloop() # abrir a janela
         self.board = None
+        self.images_pieces1 =[]
+        self.images_pieces2 = []
 
 
     def fill_main_window(self):
@@ -43,7 +46,7 @@ class PlayerInterface():
         self.an_image = PhotoImage(file="./images/yellow_square.png")
         self.other_image = PhotoImage(file="./images/rectangle.png")
         self.oponnent_image = PhotoImage(file="./images/enemy_rectangle.png")
-# Preenchimento de table_frame com 96 imagens iguais, organizadas em 12 linhas e 8 colunas
+        # Preenchimento de table_frame com 96 imagens iguais, organizadas em 12 linhas e 8 colunas
         self.board_view=[]
         self.initialize_board(12,8)
         for y in range(8):
@@ -58,13 +61,25 @@ class PlayerInterface():
                 a_column.append(aLabel)
             self.board_view.append(a_column)
             print([position for position in self.board.positions])
+            print([(piece.line,piece.column) for piece in self.board.pieces])
+        self.draw_initial_pieces()
+
+
 
     
     def initialize_board(self,line,column):
         self.board = Board(line,column)
 
+    def draw_initial_pieces(self,):
+        for piece in self.board.pieces:
+            if piece.team == 1:
+                canvas_piece1 = Canvas(self.table_frame, width=30, height=30, bg='red')
+                canvas_piece1.place(x=(piece.column * 50 +10), y=(10 + piece.line *50))
 
-
+            elif piece.team == 2:
+                canvas_piece2 = Canvas(self.table_frame, width=30, height=30, bg='blue')
+                canvas_piece2.place(x=(piece.column * 50 +10), y=(10 + piece.line *50))
+                
 
     def click(self, event,line,column):
         print(self.board.search_position(line,column))
