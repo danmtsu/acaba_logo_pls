@@ -4,6 +4,7 @@ class Piece():
         self.__column = column
         self.__frozen = False
         self.__team = team
+        self.__hasFlag = False
 
     @property
     def line(self,):
@@ -32,3 +33,6 @@ class Piece():
     @property
     def team(self,):
         return self.__team
+    
+    def cat_flag(self,):
+        self.__hasFlag = True

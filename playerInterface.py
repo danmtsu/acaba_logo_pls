@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import simpledialog
 from tkinter import Canvas
+from PIL import ImageTk, Image
 from models.board import Board
 import os
 
@@ -70,16 +71,32 @@ class PlayerInterface():
     def initialize_board(self,line,column):
         self.board = Board(line,column)
 
-    def draw_initial_pieces(self,):
+    def draw_initial_pieces(self):
+        raio = 15
+        self.piece_labels = {}  # Dicionário para armazenar os objetos Label das peças
+
         for piece in self.board.pieces:
+            x = piece.column * 50 + 25
+            y = piece.line * 50 + 25
+
             if piece.team == 1:
-                canvas_piece1 = Canvas(self.table_frame, width=30, height=30, bg='red')
-                canvas_piece1.place(x=(piece.column * 50 +10), y=(10 + piece.line *50))
+                piece_image = Image.open("./images/piece_team2.png")  # Substitua pelo caminho da imagem da peça vermelha
+                piece_image = piece_image.resize((2 * raio, 2 * raio), Image.BICUBIC)
+                piece_image = ImageTk.PhotoImage(piece_image)
+                piece_label = Label(self.table_frame, image=piece_image,)
+                piece_label.image = piece_image
+                piece_label.place(x=x, y=y, anchor='center')
+                self.piece_labels[piece] = piece_label
 
             elif piece.team == 2:
-                canvas_piece2 = Canvas(self.table_frame, width=30, height=30, bg='blue')
-                canvas_piece2.place(x=(piece.column * 50 +10), y=(10 + piece.line *50))
-                
+                piece_image = Image.open("./images/piece_team2.png")  # Substitua pelo caminho da imagem da peça azul
+                piece_image = piece_image.resize((2 * raio, 2 * raio), Image.BICUBIC)
+                piece_image = ImageTk.PhotoImage(piece_image)
+                piece_label = Label(self.table_frame, image=piece_image,)
+                piece_label.image = piece_image
+                piece_label.place(x=x, y=y, anchor='center')
+                self.piece_labels[piece] = piece_label
+
 
     def click(self, event,line,column):
         print(self.board.search_position(line,column))
